@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get File Extension</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Get File Extension</h1>
+        <div class="form-group">
+            <label for="fileInput">Upload a File:</label>
+            <input type="file" id="fileInput" accept="*/*">
+            <button onclick="getFileExtension()">Get Extension</button>
+            <p id="result" class="result"></p>
+        </div>
+    </div>
+
+    <script>
+        function getFileExtension() {
+            const fileInput = document.getElementById('fileInput');
+            const resultElement = document.getElementById('result');
+
+            if (fileInput.files.length === 0) {
+                resultElement.textContent = 'Please select a file.';
+                resultElement.style.color = 'red';
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const fileName = file.name;
+            const fileExtension = fileName.split('.').pop();
+
+            if (fileExtension === fileName) {
+                resultElement.textContent = 'No extension found.';
+            } else {
+                resultElement.textContent = `File Extension: ${fileExtension}`;
+            }
+
+            resultElement.style.color = 'green';
+        }
+    </script>
+</body>
+</html>

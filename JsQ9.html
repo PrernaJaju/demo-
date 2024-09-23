@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Image Dimensions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Get Image Dimensions</h1>
+        <div class="form-group">
+            <label for="imageInput">Upload an Image:</label>
+            <input type="file" id="imageInput" accept="image/*">
+            <button onclick="getImageDimensions()">Get Dimensions</button>
+            <p id="result" class="result"></p>
+        </div>
+    </div>
+
+    <script>
+        function getImageDimensions() {
+            const fileInput = document.getElementById('imageInput');
+            const resultElement = document.getElementById('result');
+
+            if (fileInput.files.length === 0) {
+                resultElement.textContent = 'Please select an image file.';
+                resultElement.style.color = 'red';
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    resultElement.textContent = `Width: ${img.width}px, Height: ${img.height}px`;
+                    resultElement.style.color = 'green';
+                };
+                img.src = event.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>

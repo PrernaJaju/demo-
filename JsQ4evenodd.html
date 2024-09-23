@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Even and Odd Numbers</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    
+ 
+    <h1>Even and Odd Number Series</h1>
+    <label for="start">Start of range:</label>
+    <input type="number" id="start" placeholder="Enter start number">
+    <label for="end">End of range:</label>
+    <input type="number" id="end" placeholder="Enter end number">
+    <button onclick="generateSeries()">Generate Series</button>
+
+    <div class="result" id="result"></div>
+</div>
+    <script>
+        function generateSeries() {
+            // Get input values
+            const start = parseInt(document.getElementById('start').value);
+            const end = parseInt(document.getElementById('end').value);
+
+            // Validate input
+            if (isNaN(start) || isNaN(end) || start > end) {
+                document.getElementById('result').innerHTML = '<p style="color: red;">Please enter valid start and end numbers where start is less than or equal to end.</p>';
+                return;
+            }
+
+            // Arrays to hold even and odd numbers
+            const evenNumbers = [];
+            const oddNumbers = [];
+
+            // Generate series
+            for (let i = start; i <= end; i++) {
+                if (i % 2 === 0) {
+                    evenNumbers.push(i);
+                } else {
+                    oddNumbers.push(i);
+                }
+            }
+
+            // Display results
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <p><strong>Even Numbers:</strong> ${evenNumbers.join(', ')}</p>
+                <p><strong>Odd Numbers:</strong> ${oddNumbers.join(', ')}</p>
+            `;
+        }
+    </script>
+</body>
+</html>

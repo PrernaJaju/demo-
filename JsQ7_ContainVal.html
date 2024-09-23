@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Value Contain in Array</title>
+    <link rel="stylesheet" href="JsQ7css.css">
+    
+</head>
+<body>
+    <div class="container">
+        <h1> Check Value Contain in Array</h1>
+        
+        <div class="form-group">
+            <label for="containsValueArray">Array (comma separated):</label>
+            <input type="text" id="containsValueArray" placeholder="[1, 2, 3, 4, 5]">
+            <label for="containsValue">Value to check:</label>
+            <input type="text" id="containsValue" placeholder="3">
+
+            <button onclick="checkArrayContains([1, 2, 3, 4, 5], 3)">Check Value</button>
+            <p id="result1" class="result"></p>
+        </div>
+        
+        <!-- Results -->
+        <div class="results" id="result"></div>
+    </div>
+
+    <script>
+  
+// Function to check if an array contains a specified value
+function checkArrayContains(arr, value) {
+    const result = arr.includes(value);
+    document.getElementById('result').textContent = `Array contains ${value}: ${result}`;
+}
+
+      
+    </script>
+</body>
+</html>

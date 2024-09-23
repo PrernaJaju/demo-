@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Address Book</title>
+    
+    
+    <style>
+        /* CSS for styling the form and contact list */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to right, #6ca0dc, #6bcfd1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+            display: block;
+            width: 100%;
+            max-width: 360px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #contactList {
+            max-width: 400px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #contactList > div {
+            background-color: #ffffff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #contactList h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        #contactList p {
+            margin: 5px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Digital Address Book</h1>
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="text" id="phone" placeholder="Phone Number" required>
+            <input type="text" id="address" placeholder="Address" required>
+            <button type="submit">Add Contact</button>
+        </form>
+        <div id="contactList"></div>
+    </div>
+
+    <script>
+        // JavaScript for handling form submission and data storage
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get input values
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+
+            // Create contact object
+            const contact = { name, phone, address };
+
+            // Retrieve contacts from local storage or initialize an empty array
+            let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+
+            // Add the new contact to the array
+            contacts.push(contact);
+
+            // Save updated contacts array back to local storage
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+
+            // Clear input fields after submission
+            document.getElementById('contactForm').reset();
+
+            // Display the updated contact list
+            displayContacts();
+        });
+
+        // Function to display contacts from local storage
+        function displayContacts() {
+            const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+            const contactList = document.getElementById('contactList');
+
+            // Generate HTML for each contact
+            contactList.innerHTML = contacts.map(contact => `
+                <div>
+                    <h3>${contact.name}</h3>
+                    <p>Phone: ${contact.phone}</p>
+                    <p>Address: ${contact.address}</p>
+                </div>
+            `).join('');
+        }
+
+        // Display contacts when the page loads
+        displayContacts();
+    </script>
+</body>
+</html>

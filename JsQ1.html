@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        /* Center the form on the page */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f67a7a;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the form container */
+form {
+    background-color: rgb(247, 201, 201);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+/* Style the form fields */
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Style the submit button */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #fa5a5a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Style error messages */
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form id="loginForm" onsubmit="return validateForm()">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <span id="usernameError" class="error"></span>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <span id="passwordError" class="error"></span>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Username validation: only letters, digits, and dots
+            const usernamePattern = /^[a-zA-Z0-9.]+$/;
+            const usernameError = document.getElementById("usernameError");
+            if (!usernamePattern.test(username)) {
+                usernameError.textContent = "Username can only contain letters, numbers, and dots.";
+                return false;
+            } else {
+                usernameError.textContent = "";
+            }
+
+            // Password validation: minimum 8 characters, first letter capital
+            const passwordPattern = /^[A-Z][a-zA-Z0-9]{7,}$/;
+            const passwordError = document.getElementById("passwordError");
+            if (!passwordPattern.test(password)) {
+                passwordError.textContent = "Password must be at least 8 characters long and start with a capital letter.";
+                return false;
+            } else {
+                passwordError.textContent = "";
+            }
+
+            // If both validations pass
+            return true;
+        }
+    </script>
+</body>
+</html>

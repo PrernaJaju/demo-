@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operations</title>
+    <link rel="stylesheet" href="JsQ7css.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Array Operations</h1>
+        
+        <!-- Insert Item in an Array -->
+        <div class="form-group">
+            <h2>Insert Item in an Array</h2>
+            <label for="insertArray">Array (comma separated):</label>
+            <input type="text" id="insertArray" placeholder='[1, 2, 3, 4, 5]'>
+            <label for="insertItem">Item to insert:</label>
+            <input type="text" id="insertItem" placeholder="10">
+            <label for="insertIndex">Index to insert at:</label>
+            <input type="text" id="insertIndex" placeholder="2">
+            <button onclick="insertItem()">Insert Item</button>
+            <p id="result2" class="result"></p>
+        </div>
+
+        <!-- Append an Object to an Array -->
+        <div class="form-group">
+            <h2>Append an Object to an Array</h2>
+            <label for="appendArray">Array (comma separated JSON objects, e.g., [{"name": "Alice"}, {"name": "Bob"}]):</label>
+            <input type="text" id="appendArray" placeholder='[{"name": "Alice"}, {"name": "Bob"}]'>
+            <label for="appendObject">Object to append (e.g., {"name": "Charlie"}):</label>
+            <input type="text" id="appendObject" placeholder='{"name": "Charlie"}'>
+            <button onclick="appendObject()">Append Object</button>
+            <p id="result3" class="result"></p>
+        </div>
+    </div>
+
+    <script>
+        // Function to insert an item into an array
+        function insertItem() {
+            try {
+                const arrayStr = document.getElementById('insertArray').value;
+                const item = document.getElementById('insertItem').value;
+                const index = parseInt(document.getElementById('insertIndex').value);
+
+                // Parse the array
+                let arr = JSON.parse(arrayStr);
+                if (!Array.isArray(arr)) {
+                    throw new Error('Input is not a valid array.');
+                }
+
+                // Insert item into the array
+                arr.splice(index, 0, item);
+                document.getElementById('result2').textContent = `Array after inserting ${item} at index ${index}: ${JSON.stringify(arr)}`;
+            } catch (error) {
+                document.getElementById('result2').textContent = `Error: ${error.message}`;
+            }
+        }
+
+        // Function to append an object to an array
+        function appendObject() {
+            try {
+                const arrayStr = document.getElementById('appendArray').value;
+                const objStr = document.getElementById('appendObject').value;
+
+                // Parse the array and object
+                let arr = JSON.parse(arrayStr);
+                let obj = JSON.parse(objStr);
+
+                if (!Array.isArray(arr)) {
+                    throw new Error('Input is not a valid array.');
+                }
+                if (typeof obj !== 'object' || Array.isArray(obj)) {
+                    throw new Error('Input is not a valid object.');
+                }
+
+                // Append the object to the array
+                arr.push(obj);
+                document.getElementById('result3').textContent = `Array after appending object: ${JSON.stringify(arr)}`;
+            } catch (error) {
+                document.getElementById('result3').textContent = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

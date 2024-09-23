@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Comparison</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>String Comparison</h1>
+        <form id="comparisonForm">
+            <label for="string1">Enter first string:</label>
+            <input type="text" id="string1" placeholder="First string" required>
+            <label for="string2">Enter second string:</label>
+            <input type="text" id="string2" placeholder="Second string" required>
+            <button type="button" onclick="compareStrings()">Compare Strings</button>
+        </form>
+        <div class="result" id="lengthComparison"></div>
+        <div class="result" id="contentComparison"></div>
+    </div>
+    <script>
+        // Function to compare the length of two strings
+        function compareLength(str1, str2) {
+            if (str1.length > str2.length) {
+                return 'The first string is longer.';
+            } else if (str1.length < str2.length) {
+                return 'The second string is longer.';
+            } else {
+                return 'Both strings are of the same length.';
+            }
+        }
+
+        // Function to compare the content of two strings
+        function compareContent(str1, str2) {
+            if (str1 === str2) {
+                return 'Both strings are identical.';
+            } else {
+                return 'The strings are different.';
+            }
+        }
+
+        // Main function to compare two strings
+        function compareStrings() {
+            // Get input values
+            const str1 = document.getElementById('string1').value;
+            const str2 = document.getElementById('string2').value;
+
+            // Compare strings
+            const lengthComparison = compareLength(str1, str2);
+            const contentComparison = compareContent(str1, str2);
+
+            // Display results
+            document.getElementById('lengthComparison').textContent = 'Comparing Length: ' + lengthComparison;
+            document.getElementById('contentComparison').textContent = 'Comparing Content: ' + contentComparison;
+        }
+    </script>
+</body>
+</html>

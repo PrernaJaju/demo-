@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort Words Alphabetically</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+    <h1>Sort Words Alphabetically</h1>
+    <label for="inputString">Enter a string of words:</label>
+    <input type="text" id="inputString" placeholder="Enter words separated by spaces">
+    <button onclick="sortWords()">Sort Words</button>
+    <div class="result" id="result"></div>
+</div>
+    <script>
+        function sortWords() {
+            // Get input value
+            const inputString = document.getElementById('inputString').value;
+
+            // Validate input
+            if (!inputString.trim()) {
+                document.getElementById('result').textContent = 'Please enter a string of words.';
+                return;
+            }
+
+            // Split the string into an array of words
+            const wordsArray = inputString.split(/\s+/); // Split by whitespace
+
+            // Sort the array alphabetically
+            wordsArray.sort((a, b) => a.localeCompare(b));
+
+            // Join the sorted array back into a string
+            const sortedString = wordsArray.join(' ');
+
+            // Display the result
+            document.getElementById('result').textContent = 'Sorted Words: ' + sortedString;
+        }
+    </script>
+</body>
+</html>

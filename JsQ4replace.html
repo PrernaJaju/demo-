@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Replacement</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+   
+    <h1>String Replacement</h1>
+    <label for="string">Original String:</label>
+    <input type="text" id="string" placeholder="Enter original string">
+    <label for="toReplace">Text to Replace:</label>
+    <input type="text" id="toReplace" placeholder="Text to replace">
+    <label for="replacement">Replacement Text:</label>
+    <input type="text" id="replacement" placeholder="Replacement text">
+    <button onclick="replaceText()">Replace</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        function replaceText() {
+            // Get input values
+            const originalString = document.getElementById('string').value;
+            const toReplace = document.getElementById('toReplace').value;
+            const replacement = document.getElementById('replacement').value;
+
+            // Validate input
+            if (!originalString || !toReplace) {
+                document.getElementById('result').textContent = 'Please enter the original string and text to replace.';
+                return;
+            }
+
+            // Replace text
+            const regex = new RegExp(toReplace, 'g');
+            const newString = originalString.replace(regex, replacement);
+
+            // Display result
+            document.getElementById('result').textContent = 'Modified String: ' + newString;
+        }
+    </script>
+</body>
+</html>
